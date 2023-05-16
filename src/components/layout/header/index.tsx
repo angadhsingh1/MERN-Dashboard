@@ -14,7 +14,7 @@ import { useGetIdentity, useGetLocale, useSetLocale } from "@refinedev/core";
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/mui";
 import i18n from "i18n";
 import React, { useContext } from "react";
-import { ColorModeContext } from "../../contexts/color-mode";
+import { ColorModeContext } from "../../../contexts/color-mode";
 
 type IUser = {
   id: number;
@@ -34,7 +34,9 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const currentLocale = locale();
 
   return (
-    <AppBar position={isSticky ? "sticky" : "relative"}>
+    <AppBar position={isSticky ? "sticky" : "relative"} elevation={0} sx = {{
+      background: '#000kkk'
+    }}>
       <Toolbar>
         <Stack direction="row" width="100%" alignItems="center">
           <HamburgerMenu />

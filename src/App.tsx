@@ -19,9 +19,19 @@ import routerBindings, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
+
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from "@mui/icons-material";
+
 import dataProvider from "@refinedev/simple-rest";
 import axios, { AxiosRequestConfig } from "axios";
-import { CredentialResponse } from "interfaces/google";
+import { CredentialResponse } from "./interfaces/google";
+
 import {
   BlogPostCreate,
   BlogPostEdit,
@@ -38,8 +48,9 @@ import { Login } from "pages/login";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { parseJwt } from "utils/parse-jwt";
-import { Header } from "./components/header";
+import { Title, Sider, Layout, Header } from "components/layout";
 import { ColorModeContextProvider } from "./contexts/color-mode";
+import { MuiInferencer } from "@refinedev/inferencer/mui";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -156,7 +167,7 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
-                  name: "blog_posts",
+                  name: "Properties",
                   list: "/blog-posts",
                   create: "/blog-posts/create",
                   edit: "/blog-posts/edit/:id",
@@ -164,6 +175,28 @@ function App() {
                   meta: {
                     canDelete: true,
                   },
+                  icon: <VillaOutlined />,
+                },
+                {
+                  name: "agent",
+                  list: MuiInferencer,
+                  icon: <PeopleAltOutlined />,
+                },
+                {
+                  name: "review",
+                  list: MuiInferencer,
+                  icon: <StarOutlineRounded />,
+                },
+                {
+                  name: "message",
+                  list: MuiInferencer,
+                  icon: <ChatBubbleOutline />,
+                },
+                {
+                  name: "my-profile",
+                  options: {label: 'My Profile'},
+                  list: MuiInferencer,
+                  icon: <AccountCircleOutlined />,
                 },
                 {
                   name: "categories",
