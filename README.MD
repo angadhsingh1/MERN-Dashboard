@@ -49,3 +49,7 @@ To learn more about **refine**, please check out the [Documentation](https://ref
 ## License
 
 MIT
+
+## Work Sample
+
+![image](https://github.com/angadhsingh1/MERN-Dashboard/assets/77553524/cc81c93a-77a3-41ac-931f-c30c07a4fb7e)
