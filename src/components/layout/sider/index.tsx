@@ -38,6 +38,19 @@ import {
 
 import { Title as DefaultTitle } from "../title";
 
+import { 
+    Login,
+    Home, 
+    Agents,
+    MyProfile,
+    PropertyDetails,
+    AllProperties,
+    CreateProperty, 
+    AgentProfile, 
+    EditProperty,
+  
+  } from "../../../pages";
+
 export const Sider: typeof DefaultSider = ({ render }) => {
     const [collapsed, setCollapsed] = useState(false);
     const [opened, setOpened] = useState(false);
@@ -354,6 +367,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
 
     return (
         <>
+
             <Box
                 sx={{
                     width: { xs: drawerWidth() },

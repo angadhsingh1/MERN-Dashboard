@@ -26,6 +26,7 @@ import {
   PeopleAltOutlined,
   StarOutlineRounded,
   VillaOutlined,
+  Dashboard,
 } from "@mui/icons-material";
 
 import dataProvider from "@refinedev/simple-rest";
@@ -44,13 +45,28 @@ import {
   CategoryList,
   CategoryShow,
 } from "pages/categories";
-import { Login } from "pages/login";
+
+import { 
+  Login,
+  Home, 
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty, 
+  AgentProfile, 
+  EditProperty,
+
+} from "pages";
+
+
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { parseJwt } from "utils/parse-jwt";
 import { Title, Sider, Layout, Header } from "components/layout";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { MuiInferencer } from "@refinedev/inferencer/mui";
+import { Agent } from "http";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -167,35 +183,41 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
-                  name: "Properties",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "dashboard",
+                  list: MuiInferencer,
+                  icon: <Dashboard/>,
+                },
+                {
+                  name: "properties",
+                  list: AllProperties,
+                  edit: EditProperty,
+                  create: CreateProperty,
+                  show: PropertyDetails,
                   meta: {
                     canDelete: true,
                   },
                   icon: <VillaOutlined />,
                 },
                 {
-                  name: "agent",
-                  list: MuiInferencer,
+                  name: "agents",
+                  list: Agents,
+                  show: AgentProfile,
                   icon: <PeopleAltOutlined />,
                 },
                 {
-                  name: "review",
-                  list: MuiInferencer,
+                  name: "reviews",
+                  list: Home,
                   icon: <StarOutlineRounded />,
                 },
                 {
-                  name: "message",
-                  list: MuiInferencer,
+                  name: "messages",
+                  list: Home,
                   icon: <ChatBubbleOutline />,
                 },
                 {
                   name: "my-profile",
                   options: {label: 'My Profile'},
-                  list: MuiInferencer,
+                  list: MyProfile,
                   icon: <AccountCircleOutlined />,
                 },
                 {
@@ -220,7 +242,11 @@ function App() {
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
                       <ThemedLayoutV2 Header={() => <Header isSticky={true} />}>
                         <Outlet />
+                        {/* <Sider/> */}
                       </ThemedLayoutV2>
+
+ 
+
                     </Authenticated>
                   }
                 >
@@ -234,12 +260,43 @@ function App() {
                     <Route path="edit/:id" element={<BlogPostEdit />} />
                     <Route path="show/:id" element={<BlogPostShow />} />
                   </Route>
+                  <Route path="/dashboard">
+                    <Route index element={<Home/>} />
+                    {/* <Route path="create" element={<BlogPostCreate />} /> */}
+                    {/* <Route path="edit/:id" element={<BlogPostEdit />} /> */}
+                    {/* <Route path="show/:id" element={<BlogPostShow />} /> */}
+                  </Route>
+
                   <Route path="/categories">
                     <Route index element={<CategoryList />} />
                     <Route path="create" element={<CategoryCreate />} />
                     <Route path="edit/:id" element={<CategoryEdit />} />
                     <Route path="show/:id" element={<CategoryShow />} />
                   </Route>
+
+                  <Route path="/properties">
+                    <Route index element={<AllProperties />} />
+                    <Route path="create" element={<CreateProperty />} />
+                    <Route path="edit/:id" element={<EditProperty />} />
+                    <Route path="show/:id" element={<PropertyDetails />} />
+                  </Route>
+
+                  <Route path="/agents">
+                    <Route index element={<Agents />} />
+                  </Route>
+
+                  <Route path="/my-profile">
+                    <Route index element={< MyProfile/>} />
+                  </Route>
+
+                  <Route path="/reviews">
+                    <Route index element={< Home/>} />
+                  </Route>
+
+                  <Route path="/messages">
+                    <Route index element={< Home/>} />
+                  </Route>
+
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
@@ -252,7 +309,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                 </Route>
               </Routes>
-
+              
               <RefineKbar />
               <UnsavedChangesNotifier />
             </Refine>
