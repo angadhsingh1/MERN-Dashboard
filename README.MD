@@ -26,6 +26,6 @@
 - **Google Auth Provider** [Docs](https://refine.dev/docs/core/providers/auth-provider/)
 - **i18n** [Docs](https://refine.dev/docs/core/providers/i18n-provider/)
 
-## Work Sample
+## Working Sample
 
 ![image](https://github.com/angadhsingh1/MERN-Dashboard/assets/77553524/cc81c93a-77a3-41ac-931f-c30c07a4fb7e)
